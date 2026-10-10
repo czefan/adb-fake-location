@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADB 虚拟定位小工具</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet 本地引入 (如存在) -->
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" onerror="this.onerror=null; console.log('Leaflet CSS 未加载，进入纯输入模式');">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- 侧边控制面板 -->
+        <aside class="sidebar">
+            <header class="panel-header">
+                <h2>ADB 虚拟定位</h2>
+                <div id="device-badge" class="badge badge-unavailable">检测设备中...</div>
+            </header>
+
+            <!-- 异常警告与恢复栏 -->
+            <div id="alert-box" class="alert hidden">
+                <span id="alert-message"></span>
+                <button id="btn-recover" class="btn btn-warning btn-sm hidden">执行清理恢复</button>
+            </div>
+
+            <!-- 当前运行状态信息 -->
+            <section class="section info-section">
+                <h3>当前状态</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="label">设备:</span>
+                        <span id="info-device" class="value">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">状态:</span>
+                        <span id="info-state" class="value">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">最近发送 (WGS-84):</span>
+                        <span id="info-active-coords" class="value">未开始</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">最后注入时间:</span>
+                        <span id="info-last-time" class="value">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 坐标设定与选点 -->
+            <section class="section control-section">
+                <h3>坐标配置</h3>
+                <div class="form-group">
+                    <label for="coord-sys">输入坐标系（不改变底图）:</label>
+                    <select id="coord-sys" class="form-control">
+                        <option value="WGS-84" selected>WGS-84 (标准 GPS / 无偏移)</option>
+                        <option value="GCJ-02">GCJ-02 (高德/火星坐标系，自动转 WGS-84 注入)</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="input-lat">纬度 (Latitude):</label>
+                        <input type="number" id="input-lat" class="form-control" min="-90" max="90" step="0.000001" placeholder="例如: 39.904200">
+                    </div>
+                    <div class="form-group col">
+                        <label for="input-lng">经度 (Longitude):</label>
+                        <input type="number" id="input-lng" class="form-control" min="-180" max="180" step="0.000001" placeholder="例如: 116.407400">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button id="btn-start" class="btn btn-primary" disabled>开始模拟</button>
+                    <button id="btn-apply" class="btn btn-secondary" disabled>应用新坐标</button>
+                    <button id="btn-stop" class="btn btn-danger" disabled>停止模拟</button>
+                </div>
+                <p id="action-result" class="action-result" role="status" aria-live="polite"></p>
+            </section>
+
+            <!-- 提示说明 -->
+            <footer class="panel-footer">
+                <p class="tip">⚠️ 提示：关闭浏览器网页后手机仍可能继续模拟，退出前请务必点击“停止模拟”。</p>
+            </footer>
+        </aside>
+
+        <!-- 主界面：地图容器 -->
+        <main class="main-content">
+            <div id="map" class="map-container"></div>
+                <div id="map-fallback" class="map-fallback-notice">
+                    <div class="notice-card">
+                        <h3 id="map-message">正在加载地图</h3>
+                        <p>您也可以随时直接在左侧输入经纬度数值进行精确定位注入。</p>
+                        <p class="sub-text">点击开始后，系统将自动通过 ADB 向手机写入模拟定位。</p>
+                    </div>
+                </div>
+        </main>
+    </div>
+
+    <!-- 脚本引入 -->
+    <script src="vendor/leaflet/leaflet.js" onerror="this.onerror=null; console.log('Leaflet JS 未加载');"></script>
+    <script src="app.js"></script>
+</body>
+</html>

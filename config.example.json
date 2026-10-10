@@ -1,0 +1,8 @@
+{
+  "tile_url": "https://wprd0{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=7",
+  "coordinate_system": "GCJ-02",
+  "attribution": "© AutoNavi / 高德地图",
+  "min_zoom": 3,
+  "max_zoom": 18,
+  "subdomains": "1234"
+}

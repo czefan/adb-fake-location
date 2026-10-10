@@ -1,0 +1,282 @@
+:root {
+    --bg-color: #f8fafc;
+    --panel-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 侧边面板 */
+.sidebar {
+    width: 380px;
+    min-width: 340px;
+    background: var(--panel-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+}
+
+.badge-ready { background-color: #d1fae5; color: #065f46; }
+.badge-running { background-color: #dbeafe; color: #1e40af; animation: pulse 2s infinite; }
+.badge-pending { background-color: #fef3c7; color: #92400e; }
+.badge-unavailable { background-color: #fee2e2; color: #991b1b; }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* 警告框 */
+.alert {
+    background-color: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #b45309;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.alert.hidden { display: none; }
+
+/* 状态展示 */
+.section {
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.status-grid {
+    background-color: #f1f5f9;
+    padding: 12px;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.875rem;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-item .label {
+    color: var(--text-secondary);
+}
+
+.status-item .value {
+    font-weight: 500;
+}
+
+/* 表单组件 */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-row .col {
+    flex: 1;
+}
+
+/* 按钮组 */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary { background-color: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background-color: var(--primary-hover); }
+
+.btn-secondary { background-color: #64748b; color: #fff; }
+.btn-secondary:hover:not(:disabled) { background-color: #475569; }
+
+.btn-danger { background-color: var(--danger); color: #fff; }
+.btn-danger:hover:not(:disabled) { background-color: var(--danger-hover); }
+
+.btn-warning { background-color: var(--warning); color: #fff; }
+.btn-sm { padding: 6px 10px; font-size: 0.75rem; }
+
+.panel-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-color);
+}
+
+.panel-footer .tip {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* 地图区域 */
+.main-content {
+    flex: 1;
+    position: relative;
+    height: 100%;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    background-color: #e2e8f0;
+}
+
+.map-fallback-notice {
+    position: absolute;
+    inset: 0;
+    z-index: 900;
+    pointer-events: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.notice-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 460px;
+    text-align: center;
+}
+
+.notice-card h3 {
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.notice-card p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 8px;
+}
+
+.notice-card .sub-text {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.hidden { display: none !important; }
+.action-result { margin-top: 12px; font-size: 0.8125rem; overflow-wrap: anywhere; }
+.status-item { gap: 12px; align-items: flex-start; }
+.status-item .value { text-align: right; overflow-wrap: anywhere; min-width: 0; }
+.main-content { min-width: 0; }
+@media (max-width: 720px) {
+    body { overflow: auto; height: auto; }
+    .app-layout { flex-direction: column; height: auto; min-height: 100vh; }
+    .sidebar { width: 100%; min-width: 0; overflow-y: visible; }
+    .main-content { flex: none; height: 50vh; min-height: 300px; }
+}
