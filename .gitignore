@@ -1,4 +1,5 @@
-/*.exe
+*.exe
 /dist/
 *.test.exe
 *.out
+__debug_bin*
