@@ -120,4 +120,8 @@ pwsh -File scripts/verify-adb.ps1 -Action clean -BaseUrl http://127.0.0.1:8080
 
 部分系统的定位帮助命令会返回 255，工具只对完整有效的只读帮助响应兼容此行为；修改命令仍严格检查错误。
 
-Leaflet 的许可证保存在 `web/static/vendor/leaflet/LICENSE`。
+## 许可证
+
+本项目基于 [MIT 许可证](LICENSE) 开源。
+
+内置的 Leaflet 地图交互库基于 BSD-2-Clause 许可证分发，详见 `web/static/vendor/leaflet/LICENSE`。

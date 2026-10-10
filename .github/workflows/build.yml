@@ -80,7 +80,7 @@ jobs:
           TARGET_DIR="adb-fake-location-${{ matrix.goos }}-${{ matrix.goarch }}"
           mkdir -p "${TARGET_DIR}"
           go build -trimpath -ldflags="-s -w" -o "${TARGET_DIR}/${BIN_NAME}" ./cmd/adb-fake-location
-          cp README.md config.example.json "${TARGET_DIR}/" || true
+          cp README.md LICENSE config.example.json "${TARGET_DIR}/" || true
 
           mkdir -p release-pkg
           if [ "${{ matrix.archive }}" = "zip" ]; then
